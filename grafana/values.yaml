@@ -1,0 +1,15 @@
+# I only stated here the parts I would modify in the Values.yaml file to
+# to create the configMap file. ########################################
+
+
+# Enable creating the grafana configmap
+createConfigmap: true
+
+# Extra configmaps to mount in grafana pods
+# Values are templated.
+extraConfigmapMounts: 
+   - name: grafana-users-conf
+     mountPath: /etc/grafana/provisioning/users
+     subPath: grafana-users.yaml
+     configMap: grafana-users-conf
+     readOnly: true
