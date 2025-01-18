@@ -1,23 +1,13 @@
-# Enable creating the grafana configmap
-createConfigmap: true
-users:
-  - username: "user1"
-    role: "Viewer"
-    password: "password1"
-  - username: "user2"
-    role: "Editor"
-    password: "password2"
-  - username: "user3"
-    role: "Admin"
-    password: "password3"
-
-# Extra configmaps to mount in grafana pods
-# Values are templated.
-
-extraConfigmapMounts: ### instead of the deployment???? ###
-   - name: grafana-users-conf
-     mountPath: /etc/grafana/provisioning/users
-     subPath: grafana-users.yaml
-     configMap: grafana-users-conf
-     readOnly: true
+grafana:
+  provisioning:
+    users:
+      - name: "viewer_user"
+        role: "Viewer"
+        password: "viewerpass"
+      - name: "editor_user"
+        role: "Editor"
+        password: "editorpass"
+      - name: "admin"
+        role: "Administrator"
+        password: "adminpass"
 

@@ -1,20 +1,15 @@
-{{- if .Values.createConfigmap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-users-conf
+  name: grafana-users-provisioning
   namespace: {{ include "grafana.namespace" . }}
   labels:
-    {{- include "grafana.labels" . | nindent 4 }}
-  {{- if or .Values.configMapAnnotations .Values.annotations }}
-  annotations:
-    {{- with .Values.annotations }}
-      {{- toYaml . | nindent 4 }}
-    {{- end }}
-    {{- with .Values.configMapAnnotations }}
-      {{- toYaml . | nindent 4 }}
-    {{- end }}
-  {{- end }}
+    app: grafana
 data:
-  {{- include .Values.users }}
-{{- end }}
+  users.yaml: |
+    {{- range .Values.grafana.provisioning.users }}
+    - name: {{ .name }}
+      email: {{ .email }}
+      password: {{ .password }}
+      role: {{ .role }}
+    {{- end }}

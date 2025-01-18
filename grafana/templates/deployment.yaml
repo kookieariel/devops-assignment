@@ -33,11 +33,10 @@ spec:
               protocol: TCP
           {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-      {{- with .Values.volumes }}
-      volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.nodeSelector }}
+            - name: user-provisioning
+              mountPath: /etc/grafana/provisioning
+              readOnly: true
+          volumes:
+            - name: user-provisioning
+              configMap: grafana-users-provisioning
 
