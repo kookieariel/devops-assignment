@@ -9,7 +9,6 @@ data:
   users.yaml: |
     {{- range .Values.grafana.provisioning.users }}
     - name: {{ .name }}
-      email: {{ .email }}
       password: {{ .password }}
       role: {{ .role }}
     {{- end }}
