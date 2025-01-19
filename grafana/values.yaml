@@ -2,12 +2,13 @@ grafana:
   provisioning:
     users:
       - name: "viewer_user"
-        role: "Viewer"
         password: "viewerpass"
+        role: "Viewer"
       - name: "editor_user"
-        role: "Editor"
         password: "editorpass"
+        role: "Editor"
       - name: "admin"
-        role: "Administrator"
         password: "adminpass"
+        role: "Administrator"
+
 
